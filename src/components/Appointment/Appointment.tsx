@@ -68,7 +68,7 @@ const Appointment:React.FC = () => {
           getLocalDetails = JSON.parse(getLocalDetails);
         }
         let appointmentData:any = {};
-        if(getLocalDetails[finalDate])
+        if(getLocalDetails && getLocalDetails[finalDate])
         {
           appointmentData[finalDate] = getLocalDetails[finalDate]
         }

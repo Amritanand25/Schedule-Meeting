@@ -27,8 +27,12 @@ const calenderSlice = createSlice({
         },
         changeStatus: (state, action) => {
             state.availability = state.availability?.map(item => (item.id === action.payload.id && item.time === action.payload.time) ? { ...item, isSelected: true } : { ...item, isSelected: false })
+        },
+        reSetCalender: (state) => {
+          state.selectedDate = "";
+          state.availability = [];
         }
     }
 });
-export const { updateSelectedDate, updateAvailability, changeStatus } = calenderSlice.actions;
+export const { updateSelectedDate, updateAvailability, changeStatus, reSetCalender } = calenderSlice.actions;
 export default calenderSlice.reducer;

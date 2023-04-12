@@ -1,8 +1,16 @@
 import React from "react";
 import { MdCelebration } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/useStoreHooks";
+import { reSetCalender } from "../../store/slices/calenderSlice";
+import { reSetTime } from "../../store/slices/cardSlice";
 
 const SuccessUI = () => {
+  const dispatch = useAppDispatch();
+  const resetHandler = () => {
+    dispatch(reSetCalender());
+    dispatch(reSetTime());
+  }
   return (
     <div>
       <h3 className='text-blue text-6xl flex justify-center font-extrabold mb-4'>
@@ -17,6 +25,7 @@ const SuccessUI = () => {
         <button
           type="submit"
           className="text-white mt-6 w-full text-center text-md font-medium bg-blue hover:bg-opacity-80 px-6 py-3 rounded-md"
+          onClick={resetHandler}
         >
           close
         </button>

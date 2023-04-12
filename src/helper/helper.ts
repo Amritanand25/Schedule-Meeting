@@ -80,7 +80,7 @@ export const filterAvailability = (selectedDate: string, selectedDuration: numbe
         res = res.filter(d => {
             let t1 = +d.start;
             let t2 = +d.end;
-            if(+item >= t1 && +item <=t2)
+            if(+item > t1 && +item <t2)
             {
                 return false;
             }

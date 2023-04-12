@@ -17,9 +17,12 @@ const cardSlice = createSlice({
     reducers: {
         setActiveTime: (state, action) => {
             state.selectTime = state.selectTime.map(item => item.id === action.payload ? { ...item, isActive: true } : { ...item, isActive: false })
+        },
+        reSetTime : (state) => {
+            state.selectTime = cardData
         }
     }
 });
-export const { setActiveTime } = cardSlice.actions;
+export const { setActiveTime, reSetTime } = cardSlice.actions;
 export const selectTime = (state: RootState) => state.selectTime.selectTime;
 export default cardSlice.reducer;

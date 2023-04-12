@@ -1,14 +1,25 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useStoreHooks";
 import { changeStatus } from "../../store/slices/calenderSlice";
-
-const Suggestion: React.FC = () => {
+interface Props{
+  error: boolean
+}
+const Suggestion: React.FC<Props> = ({error}) => {
   const suggestedData = useAppSelector((store) => store.calender.availability);
   const dispatch = useAppDispatch();
 
   console.log(suggestedData);
   const changeHandler = (e:any, id: number, time: string) => {
    dispatch(changeStatus({id, time}));
+  }
+
+  if(suggestedData && suggestedData.length < 1)
+  {
+    return <></>;
+  }
+  if(error)
+  {
+    return <></>
   }
   return (
     <div className="bg-white h-[22.8rem] rounded-md shadow-lg">

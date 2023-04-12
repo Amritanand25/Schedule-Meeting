@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Navigation from "../Navigation";
 import TimeCard from "./TimeCard";
 import { useAppSelector } from "../../hooks/useStoreHooks";
@@ -7,6 +7,21 @@ import { Link } from "react-router-dom";
 
 const TimeList: React.FC = () => {
   const selectTime = useAppSelector((store) => store.selectTime.selectTime);
+  const [showNextBtn, setShowNextBtn] = useState<boolean>(false);
+
+  useEffect(() => {
+    for(let i=0; i<selectTime.length;i++)
+    {
+      if(selectTime[i]?.isActive)
+      {
+        setShowNextBtn(true);
+        break;
+      }else{
+        setShowNextBtn(false);
+      }
+    }
+  }, [selectTime])
+  
   return (
     <div className="w-[75%]">
       <Navigation />
@@ -19,14 +34,21 @@ const TimeList: React.FC = () => {
         ))}
       </div>
       <div className="flex justify-center my-8">
-        <Link to="/appointment/create-appointment">
+       {showNextBtn && <Link to="/appointment/create-appointment">
           <button className="text-white text-md font-medium bg-blue hover:bg-opacity-80 px-6 py-3 flex items-center rounded-md">
             NEXT STEP
             <span className="ml-4 font-extrabold text-xl">
               <MdOutlineNavigateNext />
             </span>
           </button>
-        </Link>
+        </Link>}
+
+        {!showNextBtn && <button className="text-white text-md font-medium bg-blue bg-opacity-40 px-6 py-3 flex items-center rounded-md cursor-default">
+            NEXT STEP
+            <span className="ml-4 font-extrabold text-xl">
+              <MdOutlineNavigateNext />
+            </span>
+        </button>}
       </div>
     </div>
   );
